@@ -1,9 +1,5 @@
 # FirstPush
 FirstPush is your go-to guide to kickstart your developer journey — from crafting the perfect GitHub profile to building standout portfolios. Built for beginners, inspired by passion.
-# Tech Identity Hub
-
-![Tech Identity Hub Banner](https://example.com/path/to/banner.jpg)
-
 A community-driven platform to help beginners build their professional tech identity.
 
 ## Table of Contents
@@ -79,6 +75,3 @@ Join our growing community:
 - Portfolio Templates
 - ATS Resume Checkers
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
