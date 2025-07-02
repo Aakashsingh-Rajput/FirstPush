@@ -12,19 +12,19 @@ A community-driven platform to help beginners build their professional tech iden
 
 ## Features
 
-### 🛠 Profile Builders
+###  Profile Builders
 - GitHub Profile Customizer
 - LinkedIn Optimization Guide
 - Portfolio Website Templates
 - ATS-Friendly Resume Generator
 
-### 📚 Learning Resources
+###  Learning Resources
 - Curated roadmaps for different tech paths
 - Recommended YouTube channels and courses
 - Open-source project suggestions
 - Interview preparation materials
 
-### 👥 Community
+###  Community
 - Profile reviews and feedback
 - Success stories
 - Mentorship opportunities
