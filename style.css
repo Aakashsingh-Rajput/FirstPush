@@ -1614,3 +1614,86 @@ body {
     padding: 1.2rem 0.7rem;
   }
 }
+
+/* LinkedIn Guide - Extend GitHub Guide styles */
+.linkedin-guide .gg-hero-badge-row {
+  margin-bottom: 1rem;
+}
+.linkedin-guide .gg-hero-badge {
+  display: inline-block;
+  background: var(--gg-mint);
+  color: var(--gg-dark);
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.4rem 1.2rem;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+.linkedin-guide .gg-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+  max-width: 500px;
+  margin: 2.5rem auto 0 auto;
+}
+@media (min-width: 700px) {
+  .linkedin-guide .gg-hero-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.linkedin-guide .gg-hero-stat {
+  background: var(--gg-card-bg);
+  border-radius: 12px;
+  box-shadow: var(--gg-card-shadow);
+  padding: 1.1rem 0.5rem;
+  text-align: center;
+}
+.linkedin-guide .gg-hero-stat-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--gg-cyan);
+}
+.linkedin-guide .gg-hero-stat-label {
+  color: var(--gg-muted);
+  font-size: 0.97rem;
+}
+
+/* Footer CTA */
+.gg-footer-cta {
+  padding: 3rem 1rem 2rem 1rem;
+  background: var(--gg-dark);
+  border-top: 1px solid var(--gg-card-border);
+  color: var(--gg-cream);
+  text-align: center;
+}
+.gg-footer-cta-inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.gg-footer-cta-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+.gg-footer-cta-desc {
+  font-size: 1.2rem;
+  color: var(--gg-cyan);
+  margin-bottom: 2rem;
+}
+.gg-footer-cta-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Responsive tweaks for LinkedIn Guide */
+@media (max-width: 700px) {
+  .linkedin-guide .gg-hero-stats {
+    gap: 0.7rem;
+  }
+  .gg-footer-cta-inner {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+}

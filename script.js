@@ -432,3 +432,132 @@ document.addEventListener('DOMContentLoaded', function () {
     renderPreview();
   }
 });
+
+// --- LinkedIn Guide Interactivity ---
+document.addEventListener('DOMContentLoaded', function () {
+  if (!document.body.classList.contains('linkedin-guide')) return;
+
+  // Tab navigation
+  const tabButtons = document.querySelectorAll('.gg-tab');
+  const tabPanels = document.querySelectorAll('.gg-tab-panel');
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', function () {
+      tabButtons.forEach(b => b.classList.remove('active'));
+      tabPanels.forEach(panel => panel.hidden = true);
+      btn.classList.add('active');
+      const tab = btn.getAttribute('data-tab');
+      const panel = document.querySelector(`.gg-tab-panel[data-tab="${tab}"]`);
+      if (panel) panel.hidden = false;
+      btn.setAttribute('aria-selected', 'true');
+      tabButtons.forEach(b => { if (b !== btn) b.setAttribute('aria-selected', 'false'); });
+    });
+  });
+
+  // --- Dashboard Tab ---
+  const dashboardPanel = document.querySelector('.gg-tab-panel[data-tab="dashboard"]');
+  if (dashboardPanel) {
+    // Profile progress and checklist
+    const profileSections = [
+      { id: "photo", title: "Professional Photo", completed: true, points: 15 },
+      { id: "headline", title: "Compelling Headline", completed: true, points: 20 },
+      { id: "about", title: "About Section", completed: true, points: 25 },
+      { id: "experience", title: "Experience/Projects", completed: false, points: 20 },
+      { id: "education", title: "Education Details", completed: false, points: 10 },
+      { id: "skills", title: "Skills & Endorsements", completed: false, points: 10 },
+    ];
+    const completedSections = profileSections.filter(s => s.completed).map(s => s.id);
+    const profileProgress = Math.round((completedSections.length / profileSections.length) * 100);
+    dashboardPanel.innerHTML = `
+      <div class="gg-dashboard-grid">
+        <div class="gg-card gg-progress-card">
+          <div class="gg-card-header">Profile Strength</div>
+          <div class="gg-card-body">
+            <div class="gg-progress-percentage">${profileProgress}%</div>
+            <div class="gg-progress-bar"><div class="gg-progress-bar-inner" style="width:${profileProgress}%"></div></div>
+            <div class="gg-progress-desc">${completedSections.length} of ${profileSections.length} sections completed</div>
+          </div>
+        </div>
+        <div class="gg-card">
+          <div class="gg-card-header">Achievements</div>
+          <div class="gg-card-body">
+            <div class="gg-achievement-row">
+              <span class="gg-achievement-icon">🏆</span>
+              <div>
+                <div class="gg-achievement-count">7</div>
+                <div class="gg-achievement-label">Badges earned</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="gg-card">
+          <div class="gg-card-header">Community Rank</div>
+          <div class="gg-card-body">
+            <div class="gg-achievement-row">
+              <span class="gg-achievement-icon">⭐</span>
+              <div>
+                <div class="gg-achievement-count">#156</div>
+                <div class="gg-achievement-label">This month</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gg-card gg-milestones-card">
+        <div class="gg-card-header">Your LinkedIn Journey</div>
+        <div class="gg-card-desc">Complete these sections to build a standout profile</div>
+        <div class="gg-milestones-list">
+          ${profileSections.map(section => `
+            <div class="gg-milestone${section.completed ? ' completed' : ''}" tabindex="0" role="checkbox" aria-checked="${section.completed}">
+              <span class="gg-milestone-icon">${section.completed ? '✅' : '⚪'}</span>
+              <span>${section.title}</span>
+              <span class="gg-badge">+${section.points} pts</span>
+              ${section.completed ? '<span class="gg-badge">Completed</span>' : ''}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      <div class="gg-dashboard-grid">
+        <div class="gg-card">
+          <div class="gg-card-header">Recent Feedback</div>
+          <div class="gg-card-body">
+            <div class="gg-feedback-row">
+              <span class="gg-tab-icon">👤</span>
+              <div class="gg-feedback-main">
+                <div><b>John Doe</b> reviewed your headline</div>
+                <div class="gg-feedback-time">2 hours ago</div>
+              </div>
+            </div>
+            <div class="gg-feedback-row">
+              <span class="gg-tab-icon">👤</span>
+              <div class="gg-feedback-main">
+                <div><b>Maria Smith</b> gave you a 5-star rating</div>
+                <div class="gg-feedback-time">1 day ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="gg-card">
+          <div class="gg-card-header">Upcoming Events</div>
+          <div class="gg-card-body">
+            <div class="gg-event-row">
+              <span class="gg-tab-icon">📅</span>
+              <div>
+                <div class="gg-event-title">LinkedIn Workshop</div>
+                <div class="gg-event-time">Tomorrow, 2:00 PM</div>
+              </div>
+            </div>
+            <div class="gg-event-row">
+              <span class="gg-tab-icon">🎥</span>
+              <div>
+                <div class="gg-event-title">Recruiter Q&A Session</div>
+                <div class="gg-event-time">Friday, 4:00 PM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // TODO: Render other tabs (builder, templates, community, analyzer, mentors, resources) with similar logic and data as in the React code.
+});
