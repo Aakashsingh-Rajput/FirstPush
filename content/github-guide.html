@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Guide | FirstPush</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .github-hero {
+      background: var(--gradient-hero);
+      color: var(--text);
+      padding: 4.5rem 0 3rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .github-hero .hero-icon {
+      width: 80px;
+      margin-bottom: 1.2rem;
+      border-radius: 16px;
+      background: var(--card);
+      padding: 0.7rem;
+      box-shadow: 0 4px 16px var(--shadow-card);
+      display: inline-block;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.2rem;
+      max-width: 700px;
+      margin: 2.5rem auto 0 auto;
+    }
+    @media (min-width: 700px) {
+      .stats-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .stat {
+      background: var(--secondary);
+      color: var(--text);
+      border-radius: 18px;
+      padding: 2.2rem 1.2rem 1.7rem 1.2rem;
+      box-shadow: var(--shadow-card);
+      font-size: 1.18rem;
+      font-weight: 600;
+      text-align: center;
+      transition: box-shadow 0.18s, background 0.18s;
+    }
+    .stat .stat-value {
+      font-size: 2.3rem;
+      font-weight: bold;
+      color: #222b38;
+      margin-bottom: 0.4rem;
+    }
+    .stat .stat-label {
+      font-size: 1.08rem;
+      color: #1a2236;
+      opacity: 0.85;
+    }
+    .tab-list {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      margin: 2.5rem 0 1.5rem 0;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: var(--card);
+      color: var(--text);
+      border: 2px solid var(--secondary);
+      border-radius: 8px 8px 0 0;
+      padding: 0.7rem 1.5rem;
+      font-size: 1.08rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, border 0.18s;
+      outline: none;
+    }
+    .tab-btn.active, .tab-btn:focus {
+      background: var(--background);
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+      z-index: 2;
+    }
+    .tab-content {
+      display: none;
+      background: var(--background);
+      border-radius: 0 0 12px 12px;
+      box-shadow: var(--shadow-card);
+      padding: 2rem 1.2rem;
+      margin-bottom: 2rem;
+      min-height: 200px;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .dashboard-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+    .dashboard-card {
+      background: var(--secondary);
+      border-radius: 18px;
+      box-shadow: var(--shadow-card);
+      padding: 2rem 1.5rem;
+      min-width: 200px;
+      flex: 1 1 200px;
+      max-width: 300px;
+      text-align: center;
+      color: #222b38;
+      font-size: 1.15rem;
+    }
+    .dashboard-card .card-title {
+      font-size: 1rem;
+      color: #1a2236;
+      margin-bottom: 0.5rem;
+    }
+    .dashboard-card .card-value {
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: var(--accent);
+    }
+    .progress-bar {
+      width: 100%;
+      background: var(--muted);
+      border-radius: 8px;
+      height: 14px;
+      margin: 1.5rem 0 1.5rem 0;
+      overflow: hidden;
+    }
+    .progress {
+      background: var(--accent);
+      height: 100%;
+      width: 0%;
+      border-radius: 8px;
+      transition: width 0.4s;
+    }
+    .milestone-list {
+      margin: 2rem 0 0 0;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .milestone {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--secondary);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.7rem;
+      box-shadow: var(--shadow-card);
+      color: #222b38;
+      font-size: 1.08rem;
+    }
+    .milestone.completed {
+      opacity: 0.6;
+      text-decoration: line-through;
+    }
+    .badge {
+      background: var(--accent);
+      color: var(--text);
+      border-radius: 6px;
+      padding: 0.2rem 0.7rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+      border: none;
+    }
+    .badge.secondary {
+      background: var(--muted);
+      color: var(--text);
+    }
+    @media (max-width: 700px) {
+      .dashboard-cards { flex-direction: column; align-items: stretch; }
+      .dashboard-card { max-width: 100%; }
+      .milestone-list { max-width: 98vw; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-flex">
+      <a href="../index.html" class="logo-link">
+        <img src="../assets/logo.png" alt="FirstPush Logo" class="logo">
+        <span class="brand">FirstPush</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="github-guide.html" style="background:var(--accent);color:var(--text);">GitHub</a></li>
+        <li><a href="linkedin-guide.html">LinkedIn</a></li>
+        <li><a href="portfolio-guide.html">Portfolio</a></li>
+        <li><a href="resume-guide.html">Resume</a></li>
+        <li><a href="../resources/roadmaps.html">Resources</a></li>
+        <li><a href="../extras/quiz.html">Quiz</a></li>
+        <li><a href="../about/about.html">About</a></li>
+        <li><a href="../contact/contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="github-hero">
+    <div class="hero-content">
+      <span class="hero-icon">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="#222b38"/><path d="M24 8C16.268 8 10 14.268 10 22C10 28.627 14.925 34.019 21.125 35.5C21.875 35.625 22.125 35.219 22.125 34.875C22.125 34.563 22.125 33.75 22.125 32.938C17.5 33.938 16.625 31.063 16.625 31.063C15.875 29.188 14.75 28.75 14.75 28.75C13.188 27.75 14.875 27.75 14.875 27.75C16.625 27.875 17.563 29.563 17.563 29.563C19.063 32.063 21.438 31.375 22.375 31.063C22.5 29.938 22.938 29.188 23.438 28.813C19.938 28.438 16.25 27.063 16.25 21.938C16.25 20.563 16.75 19.5 17.563 18.688C17.438 18.313 17.063 16.938 17.688 15.313C17.688 15.313 18.75 14.938 22.125 17.188C23.125 16.938 24.188 16.813 25.25 16.813C26.313 16.813 27.375 16.938 28.375 17.188C31.75 14.938 32.813 15.313 32.813 15.313C33.438 16.938 33.063 18.313 32.938 18.688C33.75 19.5 34.25 20.563 34.25 21.938C34.25 27.063 30.563 28.438 27.063 28.813C27.688 29.313 28.188 30.188 28.188 31.438C28.188 33.188 28.188 34.438 28.188 34.875C28.188 35.219 28.438 35.625 29.188 35.5C35.375 34.019 40.313 28.627 40.313 22C40.313 14.268 34.045 8 26.313 8H24Z" fill="#f8f6e3"/></svg>
+      </span>
+      <h1 style="font-size:2.5rem;font-weight:800;margin-bottom:0.7rem;">GitHub Guide</h1>
+      <p class="subtitle" style="font-size:1.25rem;color:var(--muted);margin-bottom:2.2rem;">Build Your Dream GitHub Profile</p>
+      <p style="font-size:1.1rem;color:var(--text);max-width:600px;margin:0 auto 1.5rem auto;">Join thousands of students learning to showcase their coding journey with personalized guidance, interactive tools, and a supportive community.</p>
+      <div class="stats-grid">
+        <div class="stat"><div class="stat-value">10K+</div><div class="stat-label">Profiles Built</div></div>
+        <div class="stat"><div class="stat-value">95%</div><div class="stat-label">Improved Readmes</div></div>
+        <div class="stat"><div class="stat-value">1M+</div><div class="stat-label">Commits Tracked</div></div>
+        <div class="stat"><div class="stat-value">24/7</div><div class="stat-label">Community Support</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="tab-list">
+      <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+      <button class="tab-btn" data-tab="learn">Learn</button>
+      <button class="tab-btn" data-tab="practice">Practice</button>
+      <button class="tab-btn" data-tab="community">Community</button>
+      <button class="tab-btn" data-tab="review">AI Review</button>
+      <button class="tab-btn" data-tab="mentors">Mentors</button>
+    </div>
+    <div class="tab-content active" id="tab-dashboard">
+      <div class="dashboard-cards">
+        <div class="dashboard-card">
+          <div class="card-title">Overall Progress</div>
+          <div class="card-value" id="progressValue">33%</div>
+          <div class="progress-bar"><div class="progress" id="progressBar" style="width:33%"></div></div>
+          <div style="font-size:0.95rem;color:var(--muted);">2 of 6 milestones completed</div>
+        </div>
+        <div class="dashboard-card">
+          <div class="card-title">Achievements</div>
+          <div class="card-value">3</div>
+          <div style="font-size:0.95rem;color:var(--muted);">Badges earned</div>
+        </div>
+        <div class="dashboard-card">
+          <div class="card-title">Community Rank</div>
+          <div class="card-value">#247</div>
+          <div style="font-size:0.95rem;color:var(--muted);">This month</div>
+        </div>
+      </div>
+      <div class="milestone-list" id="milestoneList">
+        <!-- Milestones will be rendered here by JS -->
+      </div>
+    </div>
+    <div class="tab-content" id="tab-learn">
+      <h2>Learn</h2>
+      <p>Learning modules coming soon...</p>
+    </div>
+    <div class="tab-content" id="tab-practice">
+      <h2>Practice</h2>
+      <p>Practice zone coming soon...</p>
+    </div>
+    <div class="tab-content" id="tab-community">
+      <h2>Community</h2>
+      <p>Community hub coming soon...</p>
+    </div>
+    <div class="tab-content" id="tab-review">
+      <h2>AI Review</h2>
+      <p>AI-powered profile review coming soon...</p>
+    </div>
+    <div class="tab-content" id="tab-mentors">
+      <h2>Mentors</h2>
+      <p>Mentor match coming soon...</p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer-flex">
+      <div class="footer-brand">
+        <img src="../assets/logo.png" alt="FirstPush Logo" class="footer-logo">
+        <span>FirstPush</span>
+      </div>
+      <div class="footer-links">
+        <a href="../about/about.html">About</a>
+        <a href="../contact/contact.html">Contact</a>
+        <a href="../resources/roadmaps.html">Resources</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Tab switching logic
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const tab = btn.getAttribute('data-tab');
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        document.getElementById('tab-' + tab).classList.add('active');
+      });
+    });
+
+    // Milestone checklist logic
+    const milestones = [
+      { id: 0, title: "Create your first repository", completed: true },
+      { id: 1, title: "Write a compelling README", completed: true },
+      { id: 2, title: "Make your first commit", completed: false },
+      { id: 3, title: "Create your first pull request", completed: false },
+      { id: 4, title: "Add project documentation", completed: false },
+      { id: 5, title: "Contribute to open source", completed: false },
+    ];
+    let checkedItems = [0, 1];
+    function renderMilestones() {
+      const list = document.getElementById('milestoneList');
+      list.innerHTML = '';
+      milestones.forEach(milestone => {
+        const isChecked = checkedItems.includes(milestone.id);
+        const div = document.createElement('div');
+        div.className = 'milestone' + (isChecked ? ' completed' : '');
+        div.innerHTML = `
+          <button onclick="toggleMilestone(${milestone.id})" style="background:none;border:none;cursor:pointer;outline:none;">
+            ${isChecked ? '✅' : '⭕'}
+          </button>
+          <span style="flex:1;">${milestone.title}</span>
+          ${isChecked ? '<span class="badge secondary">Completed</span>' : ''}
+        `;
+        list.appendChild(div);
+      });
+      // Update progress
+      const completedCount = checkedItems.length;
+      const percent = Math.round((completedCount / milestones.length) * 100);
+      document.getElementById('progressValue').textContent = percent + '%';
+      document.getElementById('progressBar').style.width = percent + '%';
+      document.querySelector('.dashboard-card .card-value').textContent = percent + '%';
+      document.querySelector('.dashboard-card div[style*="font-size:0.95rem"]').textContent = `${completedCount} of ${milestones.length} milestones completed`;
+    }
+    window.toggleMilestone = function(id) {
+      if (checkedItems.includes(id)) {
+        checkedItems = checkedItems.filter(item => item !== id);
+      } else {
+        checkedItems.push(id);
+      }
+      renderMilestones();
+    }
+    renderMilestones();
+  </script>
+</body>
+</html>
