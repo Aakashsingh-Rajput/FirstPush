@@ -1,451 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LinkedIn Guide | FirstPush</title>
-  <link rel="stylesheet" href="../style.css">
-  <style>
-    .linkedin-hero {
-      background: var(--gradient-hero);
-      color: var(--text);
-      padding: 4.5rem 0 3rem 0;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .linkedin-hero .hero-icon {
-      width: 80px;
-      margin-bottom: 1.2rem;
-      border-radius: 16px;
-      background: var(--card);
-      padding: 0.7rem;
-      box-shadow: 0 4px 16px var(--shadow-card);
-      display: inline-block;
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-      max-width: 500px;
-      margin: 2rem auto 0 auto;
-    }
-    @media (min-width: 700px) {
-      .stats-grid { grid-template-columns: repeat(4, 1fr); }
-    }
-    .stat {
-      text-align: center;
-    }
-    .stat .stat-value {
-      font-size: 2rem;
-      font-weight: bold;
-      color: var(--accent);
-    }
-    .stat .stat-label {
-      font-size: 1rem;
-      color: var(--muted);
-    }
-    .tab-list {
-      display: flex;
-      gap: 0.5rem;
-      justify-content: center;
-      margin: 2.5rem 0 1.5rem 0;
-      flex-wrap: wrap;
-    }
-    .tab-btn {
-      background: var(--card);
-      color: var(--text);
-      border: 2px solid var(--secondary);
-      border-radius: 8px 8px 0 0;
-      padding: 0.7rem 1.5rem;
-      font-size: 1.08rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.18s, color 0.18s, border 0.18s;
-      outline: none;
-    }
-    .tab-btn.active, .tab-btn:focus {
-      background: var(--background);
-      color: var(--accent);
-      border-bottom: 2px solid var(--accent);
-      z-index: 2;
-    }
-    .tab-content {
-      display: none;
-      background: var(--background);
-      border-radius: 0 0 12px 12px;
-      box-shadow: var(--shadow-card);
-      padding: 2rem 1.2rem;
-      margin-bottom: 2rem;
-      min-height: 200px;
-    }
-    .tab-content.active {
-      display: block;
-    }
-    /* Dashboard cards */
-    .dashboard-cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-      justify-content: center;
-    }
-    .dashboard-card {
-      background: var(--card);
-      border-radius: 12px;
-      box-shadow: var(--shadow-card);
-      padding: 1.2rem 1.5rem;
-      min-width: 180px;
-      flex: 1 1 180px;
-      max-width: 260px;
-      text-align: center;
-    }
-    .dashboard-card .card-title {
-      font-size: 1rem;
-      color: var(--muted);
-      margin-bottom: 0.5rem;
-    }
-    .dashboard-card .card-value {
-      font-size: 2rem;
-      font-weight: bold;
-      color: var(--accent);
-    }
-    .progress-bar {
-      width: 100%;
-      background: var(--muted);
-      border-radius: 8px;
-      height: 12px;
-      margin: 1.5rem 0 1.5rem 0;
-      overflow: hidden;
-    }
-    .progress {
-      background: var(--accent);
-      height: 100%;
-      width: 0%;
-      border-radius: 8px;
-      transition: width 0.4s;
-    }
-    .profile-section-list {
-      margin: 2rem 0 0 0;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .profile-section {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--card);
-      border-radius: 8px;
-      padding: 0.8rem 1.2rem;
-      margin-bottom: 0.7rem;
-      box-shadow: var(--shadow-card);
-    }
-    .profile-section.completed {
-      opacity: 0.6;
-      text-decoration: line-through;
-    }
-    .badge {
-      background: var(--accent);
-      color: var(--primary);
-      border-radius: 6px;
-      padding: 0.2rem 0.7rem;
-      font-size: 0.92rem;
-      font-weight: 600;
-      margin-left: 0.5rem;
-    }
-    .badge.secondary {
-      background: var(--muted);
-      color: var(--primary);
-    }
-    @media (max-width: 700px) {
-      .dashboard-cards { flex-direction: column; align-items: stretch; }
-      .dashboard-card { max-width: 100%; }
-      .profile-section-list { max-width: 98vw; }
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LinkedIn Profile Builder Guide</title>
+  <link rel="stylesheet" href="../style.css" />
 </head>
-<body>
-  <nav class="navbar">
-    <div class="container nav-flex">
-      <a href="../index.html" class="logo-link">
-        <img src="../assets/logo.png" alt="FirstPush Logo" class="logo">
-        <span class="brand">FirstPush</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="github-guide.html">GitHub</a></li>
-        <li><a href="linkedin-guide.html" style="background:var(--accent);color:var(--primary);">LinkedIn</a></li>
-        <li><a href="portfolio-guide.html">Portfolio</a></li>
-        <li><a href="resume-guide.html">Resume</a></li>
-        <li><a href="../resources/roadmaps.html">Resources</a></li>
-        <li><a href="../extras/quiz.html">Quiz</a></li>
-        <li><a href="../about/about.html">About</a></li>
-        <li><a href="../contact/contact.html">Contact</a></li>
-      </ul>
+<body class="linkedin-guide pastel-bg">
+  <!-- Header -->
+  <header class="gg-header">
+    <div class="gg-header-inner">
+      <div class="gg-logo">
+        <span class="gg-logo-icon"> <!-- LinkedIn SVG -->
+          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 8a6 6 0 0 1 6 6v6"/><line x1="8" y1="11" x2="8" y2="16"/><line x1="8" y1="8" x2="8" y2="8"/></svg>
+        </span>
+        <span class="gg-logo-text gradient-text">LinkedInBuilder</span>
+      </div>
+      <div class="gg-header-actions">
+        <button class="gg-btn gg-btn-outline gg-signin-btn">
+          <span class="gg-btn-icon"> <!-- LinkedIn SVG -->
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 8a6 6 0 0 1 6 6v6"/><line x1="8" y1="11" x2="8" y2="16"/><line x1="8" y1="8" x2="8" y2="8"/></svg>
+          </span>
+          Connect LinkedIn
+        </button>
+        <button class="gg-btn gg-btn-primary">
+          Get Started Free
+        </button>
+      </div>
     </div>
-  </nav>
+  </header>
 
-  <section class="linkedin-hero">
-    <div class="hero-content">
-      <span class="hero-icon">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="12" fill="#ffd700"/><path d="M14.5 19.5V33.5H19.5V19.5H14.5ZM17 16.5C18.38 16.5 19.5 15.38 19.5 14C19.5 12.62 18.38 11.5 17 11.5C15.62 11.5 14.5 12.62 14.5 14C14.5 15.38 15.62 16.5 17 16.5ZM22.5 19.5V33.5H27.5V26.5C27.5 24.57 29.07 23 31 23C32.93 23 34.5 24.57 34.5 26.5V33.5H39.5V25.5C39.5 21.91 36.59 19 33 19C30.98 19 29.13 20.01 28.06 21.53V19.5H22.5Z" fill="#6b4f27"/></svg>
-      </span>
-      <h1 style="font-size:2.5rem;font-weight:800;margin-bottom:0.7rem;">LinkedIn Guide</h1>
-      <p class="subtitle" style="font-size:1.25rem;color:var(--muted);margin-bottom:2.2rem;">Build Your Dream LinkedIn Profile</p>
-      <p style="font-size:1.1rem;color:var(--text);max-width:600px;margin:0 auto 1.5rem auto;">Transform your academic journey into a professional story that gets noticed. Join 50,000+ students who've landed internships and jobs with our step-by-step guidance.</p>
-      <div class="stats-grid">
-        <div class="stat"><div class="stat-value">50K+</div><div class="stat-label">Students Helped</div></div>
-        <div class="stat"><div class="stat-value">89%</div><div class="stat-label">Got Interviews</div></div>
-        <div class="stat"><div class="stat-value">500+</div><div class="stat-label">Verified Mentors</div></div>
-        <div class="stat"><div class="stat-value">24/7</div><div class="stat-label">Community Support</div></div>
+  <!-- Hero Section -->
+  <section class="gg-hero">
+    <div class="gg-hero-inner">
+      <div class="gg-hero-badge-row">
+        <span class="gg-hero-badge">🎓 Built for Students</span>
+      </div>
+      <h2 class="gg-hero-title gradient-text">Build Your Dream LinkedIn Profile</h2>
+      <p class="gg-hero-desc">
+        Transform your academic journey into a professional story that gets noticed. Join 50,000+ students who've landed internships and jobs with our step-by-step guidance.
+      </p>
+      <div class="gg-hero-actions">
+        <button class="gg-btn gg-btn-primary">
+          <span class="gg-btn-icon">🎯</span>
+          Start Building Now
+        </button>
+        <button class="gg-btn gg-btn-outline">
+          <span class="gg-btn-icon">▶️</span>
+          Watch Success Stories
+        </button>
+      </div>
+      <div class="gg-hero-stats">
+        <div class="gg-hero-stat"><span class="gg-hero-stat-value">50K+</span><span class="gg-hero-stat-label">Students Helped</span></div>
+        <div class="gg-hero-stat"><span class="gg-hero-stat-value">89%</span><span class="gg-hero-stat-label">Got Interviews</span></div>
+        <div class="gg-hero-stat"><span class="gg-hero-stat-value">500+</span><span class="gg-hero-stat-label">Verified Mentors</span></div>
+        <div class="gg-hero-stat"><span class="gg-hero-stat-value">24/7</span><span class="gg-hero-stat-label">Community Support</span></div>
       </div>
     </div>
   </section>
 
-  <div class="container">
-    <div class="tab-list">
-      <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
-      <button class="tab-btn" data-tab="builder">Builder</button>
-      <button class="tab-btn" data-tab="templates">Templates</button>
-      <button class="tab-btn" data-tab="community">Community</button>
-      <button class="tab-btn" data-tab="analyzer">Analyzer</button>
-      <button class="tab-btn" data-tab="mentors">Mentors</button>
-      <button class="tab-btn" data-tab="resources">Resources</button>
-    </div>
-    <div class="tab-content active" id="tab-dashboard">
-      <div class="dashboard-cards">
-        <div class="dashboard-card">
-          <div class="card-title">Profile Strength</div>
-          <div class="card-value" id="profileStrength">65%</div>
-          <div class="progress-bar"><div class="progress" id="progressBar" style="width:65%"></div></div>
-          <div style="font-size:0.95rem;color:var(--muted);">3 of 6 sections completed</div>
-        </div>
-        <div class="dashboard-card">
-          <div class="card-title">Achievements</div>
-          <div class="card-value">7</div>
-          <div style="font-size:0.95rem;color:var(--muted);">Badges earned</div>
-        </div>
-        <div class="dashboard-card">
-          <div class="card-title">Community Rank</div>
-          <div class="card-value">#156</div>
-          <div style="font-size:0.95rem;color:var(--muted);">This month</div>
-        </div>
+  <!-- Main Content -->
+  <main class="gg-main">
+    <div class="gg-tabs">
+      <div class="gg-tabs-list" role="tablist">
+        <button class="gg-tab active" data-tab="dashboard" role="tab" aria-selected="true"><span class="gg-tab-icon">🏆</span><span class="gg-tab-label">Dashboard</span></button>
+        <button class="gg-tab" data-tab="builder" role="tab"><span class="gg-tab-icon">🎯</span><span class="gg-tab-label">Builder</span></button>
+        <button class="gg-tab" data-tab="templates" role="tab"><span class="gg-tab-icon">📄</span><span class="gg-tab-label">Templates</span></button>
+        <button class="gg-tab" data-tab="community" role="tab"><span class="gg-tab-icon">👥</span><span class="gg-tab-label">Community</span></button>
+        <button class="gg-tab" data-tab="analyzer" role="tab"><span class="gg-tab-icon">⚡</span><span class="gg-tab-label">Analyzer</span></button>
+        <button class="gg-tab" data-tab="mentors" role="tab"><span class="gg-tab-icon">❤️</span><span class="gg-tab-label">Mentors</span></button>
+        <button class="gg-tab" data-tab="resources" role="tab"><span class="gg-tab-icon">📚</span><span class="gg-tab-label">Resources</span></button>
       </div>
-      <div class="profile-section-list">
-        <div class="profile-section completed">Professional Photo <span class="badge">+15 pts</span> <span class="badge secondary">Completed</span></div>
-        <div class="profile-section completed">Compelling Headline <span class="badge">+20 pts</span> <span class="badge secondary">Completed</span></div>
-        <div class="profile-section completed">About Section <span class="badge">+25 pts</span> <span class="badge secondary">Completed</span></div>
-        <div class="profile-section">Experience/Projects <span class="badge">+20 pts</span></div>
-        <div class="profile-section">Education Details <span class="badge">+10 pts</span></div>
-        <div class="profile-section">Skills & Endorsements <span class="badge">+10 pts</span></div>
-      </div>
-    </div>
-    <div class="tab-content" id="tab-builder">
-      <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:1.2rem;">Interactive Profile Builder</h2>
-      <div style="display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;align-items:flex-start;">
-        <div style="flex:1 1 260px;max-width:340px;background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;margin-bottom:1.5rem;">
-          <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:0.7rem;color:var(--accent);">Smart Profile Builder</h3>
-          <div style="margin-bottom:1rem;">
-            <label for="major" style="font-weight:500;">Your Major</label><br>
-            <select id="major" style="width:100%;margin-top:0.3rem;padding:0.5rem;border-radius:6px;background:var(--background);color:var(--text);border:1px solid var(--secondary);">
-              <option>Computer Science</option>
-              <option>Business Administration</option>
-              <option>Engineering</option>
-              <option>Liberal Arts</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div style="margin-bottom:1rem;">
-            <label for="goal" style="font-weight:500;">Career Goal</label><br>
-            <select id="goal" style="width:100%;margin-top:0.3rem;padding:0.5rem;border-radius:6px;background:var(--background);color:var(--text);border:1px solid var(--secondary);">
-              <option>Software Engineer</option>
-              <option>Product Manager</option>
-              <option>Consultant</option>
-              <option>Data Analyst</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <button id="generatePlan" style="width:100%;background:var(--accent);color:var(--primary);font-weight:700;padding:0.7rem 0;border:none;border-radius:8px;cursor:pointer;font-size:1.08rem;">Generate Personalized Plan</button>
-          <div id="personalizedPlan" style="margin-top:1.2rem;display:none;background:var(--muted);color:var(--primary);padding:1rem;border-radius:8px;font-size:1rem;"></div>
-        </div>
-        <div style="flex:1 1 260px;max-width:340px;background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;margin-bottom:1.5rem;">
-          <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:0.7rem;color:var(--accent);">Recruiter View Simulator</h3>
-          <div style="background:var(--background);border-radius:8px;padding:1rem;margin-bottom:1rem;">
-            <div style="font-weight:600;">Your Name</div>
-            <div style="font-size:0.98rem;color:var(--muted);margin-bottom:0.5rem;">Computer Science Student | Aspiring Software Engineer</div>
-            <ul style="font-size:0.95rem;color:var(--text);list-style:none;padding-left:0;">
-              <li>✅ Professional photo</li>
-              <li>✅ Compelling headline</li>
-              <li>⚠️ Missing experience section</li>
-              <li>❌ No skills listed</li>
-            </ul>
-          </div>
-          <button style="width:100%;background:var(--secondary);color:var(--accent);font-weight:600;padding:0.6rem 0;border:none;border-radius:8px;cursor:pointer;font-size:1rem;">Full Recruiter Analysis</button>
-        </div>
+      <div class="gg-tabs-content">
+        <!-- Dashboard Tab -->
+        <section class="gg-tab-panel" data-tab="dashboard">
+          <!-- Content will be rendered by JS -->
+        </section>
+        <!-- Builder Tab -->
+        <section class="gg-tab-panel" data-tab="builder" hidden>
+          <!-- Content will be rendered by JS -->
+        </section>
+        <!-- Templates Tab -->
+        <section class="gg-tab-panel" data-tab="templates" hidden>
+          <!-- Content will be rendered by JS -->
+        </section>
+        <!-- Community Tab -->
+        <section class="gg-tab-panel" data-tab="community" hidden>
+          <!-- Content will be rendered by JS -->
+        </section>
+        <!-- Analyzer Tab -->
+        <section class="gg-tab-panel" data-tab="analyzer" hidden>
+          <!-- Content will be rendered by JS -->
+        </section>
+        <!-- Mentors Tab -->
+        <section class="gg-tab-panel" data-tab="mentors" hidden>
+          <!-- Content will be rendered by JS -->
+        </section>
+        <!-- Resources Tab -->
+        <section class="gg-tab-panel" data-tab="resources" hidden>
+          <!-- Content will be rendered by JS -->
+        </section>
       </div>
     </div>
-    <div class="tab-content" id="tab-templates">
-      <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:1.2rem;">Student-Focused Templates</h2>
-      <div style="display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;">
-        <div style="background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;max-width:260px;flex:1 1 180px;">
-          <div style="font-weight:600;color:var(--accent);margin-bottom:0.5rem;">Tech Project Showcase</div>
-          <div style="font-size:0.98rem;color:var(--text);margin-bottom:0.7rem;">Highlight coding projects and technical skills</div>
-          <button class="badge" style="margin-bottom:0.5rem;">Computer Science</button><br>
-          <button class="badge secondary">Preview</button> <button class="badge">Use Template</button>
-        </div>
-        <div style="background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;max-width:260px;flex:1 1 180px;">
-          <div style="font-weight:600;color:var(--accent);margin-bottom:0.5rem;">Leadership & Strategy</div>
-          <div style="font-size:0.98rem;color:var(--text);margin-bottom:0.7rem;">Emphasize leadership roles and business acumen</div>
-          <button class="badge" style="margin-bottom:0.5rem;">Business</button><br>
-          <button class="badge secondary">Preview</button> <button class="badge">Use Template</button>
-        </div>
-        <div style="background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;max-width:260px;flex:1 1 180px;">
-          <div style="font-weight:600;color:var(--accent);margin-bottom:0.5rem;">Innovation & Problem Solving</div>
-          <div style="font-size:0.98rem;color:var(--text);margin-bottom:0.7rem;">Showcase technical projects and analytical thinking</div>
-          <button class="badge" style="margin-bottom:0.5rem;">Engineering</button><br>
-          <button class="badge secondary">Preview</button> <button class="badge">Use Template</button>
-        </div>
-        <div style="background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;max-width:260px;flex:1 1 180px;">
-          <div style="font-weight:600;color:var(--accent);margin-bottom:0.5rem;">Communication & Research</div>
-          <div style="font-size:0.98rem;color:var(--text);margin-bottom:0.7rem;">Highlight research, writing, and communication skills</div>
-          <button class="badge" style="margin-bottom:0.5rem;">Liberal Arts</button><br>
-          <button class="badge secondary">Preview</button> <button class="badge">Use Template</button>
-        </div>
-      </div>
-    </div>
-    <div class="tab-content" id="tab-community">
-      <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:1.2rem;">Community Hub</h2>
-      <div style="display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;">
-        <div style="background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;max-width:320px;flex:1 1 220px;">
-          <div style="font-weight:600;color:var(--accent);margin-bottom:0.5rem;">Success Story</div>
-          <div style="font-size:0.98rem;color:var(--text);margin-bottom:0.7rem;">"The step-by-step guide helped me transform my basic profile into a professional showcase!"</div>
-          <div style="font-size:0.95rem;color:var(--muted);">Sarah Chen, Google Intern</div>
-        </div>
-        <div style="background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;max-width:320px;flex:1 1 220px;">
-          <div style="font-weight:600;color:var(--accent);margin-bottom:0.5rem;">Peer Review Exchange</div>
-          <div style="font-size:0.98rem;color:var(--text);margin-bottom:0.7rem;">Give feedback to get feedback. Review requests from other students.</div>
-          <button class="badge secondary">Review</button> <button class="badge">Request Review</button>
-        </div>
-        <div style="background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;max-width:320px;flex:1 1 220px;">
-          <div style="font-weight:600;color:var(--accent);margin-bottom:0.5rem;">Study Groups</div>
-          <div style="font-size:0.98rem;color:var(--text);margin-bottom:0.7rem;">Join profile building study groups. Next: Tomorrow 7PM</div>
-          <button class="badge">Join Group</button>
-        </div>
-      </div>
-    </div>
-    <div class="tab-content" id="tab-analyzer">
-      <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:1.2rem;">Profile Analyzer</h2>
-      <div style="max-width:500px;margin:0 auto 1.5rem auto;background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;">
-        <label for="profileUrl" style="font-weight:500;">LinkedIn Profile URL</label><br>
-        <input id="profileUrl" type="text" placeholder="Enter your LinkedIn profile URL..." style="width:100%;margin-top:0.3rem;padding:0.5rem;border-radius:6px;background:var(--background);color:var(--text);border:1px solid var(--secondary);margin-bottom:1rem;">
-        <button id="analyzeBtn" style="width:100%;background:var(--accent);color:var(--primary);font-weight:700;padding:0.7rem 0;border:none;border-radius:8px;cursor:pointer;font-size:1.08rem;">Analyze Now</button>
-        <div id="analysisResult" style="margin-top:1.2rem;display:none;background:var(--muted);color:var(--primary);padding:1rem;border-radius:8px;font-size:1rem;">
-          <b>Sample Analysis:</b><br>
-          <ul style="margin:0.7rem 0 0 1.2rem;padding:0;">
-            <li>✔️ Strong headline</li>
-            <li>⚠️ Missing skills</li>
-            <li>❌ Weak about section</li>
-          </ul>
-          <div style="margin-top:0.7rem;">Tip: Add 5-10 relevant skills and expand your summary with achievements and keywords.</div>
-        </div>
-      </div>
-    </div>
-    <div class="tab-content" id="tab-mentors">
-      <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:1.2rem;">Mentor Network</h2>
-      <div style="display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;">
-        <div style="background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;max-width:260px;flex:1 1 180px;">
-          <div style="font-weight:600;color:var(--accent);margin-bottom:0.5rem;">Dr. Jennifer Liu</div>
-          <div style="font-size:0.98rem;color:var(--text);margin-bottom:0.7rem;">Senior Software Engineer, Microsoft</div>
-          <div style="font-size:0.95rem;color:var(--muted);margin-bottom:0.5rem;">Tech Recruiting, Career Development</div>
-          <button class="badge secondary">Message</button> <button class="badge">Book</button>
-        </div>
-        <div style="background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;max-width:260px;flex:1 1 180px;">
-          <div style="font-weight:600;color:var(--accent);margin-bottom:0.5rem;">Robert Martinez</div>
-          <div style="font-size:0.98rem;color:var(--text);margin-bottom:0.7rem;">VP of Talent Acquisition, Goldman Sachs</div>
-          <div style="font-size:0.95rem;color:var(--muted);margin-bottom:0.5rem;">Finance Careers, Networking</div>
-          <button class="badge secondary">Message</button> <button class="badge">Book</button>
-        </div>
-        <div style="background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;max-width:260px;flex:1 1 180px;">
-          <div style="font-weight:600;color:var(--accent);margin-bottom:0.5rem;">Amanda Foster</div>
-          <div style="font-size:0.98rem;color:var(--text);margin-bottom:0.7rem;">Head of University Relations, Deloitte</div>
-          <div style="font-size:0.95rem;color:var(--muted);margin-bottom:0.5rem;">Consulting, Leadership</div>
-          <button class="badge secondary">Message</button> <button class="badge">Book</button>
-        </div>
-      </div>
-    </div>
-    <div class="tab-content" id="tab-resources">
-      <h2 style="font-size:1.5rem;font-weight:700;margin-bottom:1.2rem;">Learning Resources</h2>
-      <div style="display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;">
-        <div style="background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;max-width:260px;flex:1 1 180px;">
-          <div style="font-weight:600;color:var(--accent);margin-bottom:0.5rem;">Video Tutorials</div>
-          <div style="font-size:0.98rem;color:var(--text);margin-bottom:0.7rem;">Step-by-step visual guides for profile setup, networking, and interviews.</div>
-          <button class="badge secondary">Watch Now</button>
-        </div>
-        <div style="background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;max-width:260px;flex:1 1 180px;">
-          <div style="font-weight:600;color:var(--accent);margin-bottom:0.5rem;">Checklists</div>
-          <div style="font-size:0.98rem;color:var(--text);margin-bottom:0.7rem;">Downloadable guides for profile optimization, networking, and job search.</div>
-          <button class="badge secondary">Download</button>
-        </div>
-        <div style="background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;max-width:260px;flex:1 1 180px;">
-          <div style="font-weight:600;color:var(--accent);margin-bottom:0.5rem;">Jargon Decoder</div>
-          <div style="font-size:0.98rem;color:var(--text);margin-bottom:0.7rem;">Industry term explainer and LinkedIn feature guide.</div>
-          <button class="badge secondary">Explore</button>
-        </div>
-        <div style="background:var(--card);border-radius:12px;box-shadow:var(--shadow-card);padding:1.2rem 1.5rem;max-width:260px;flex:1 1 180px;">
-          <div style="font-weight:600;color:var(--accent);margin-bottom:0.5rem;">Industry Insights</div>
-          <div style="font-size:0.98rem;color:var(--text);margin-bottom:0.7rem;">Career-specific guidance for tech, finance, consulting, and more.</div>
-          <button class="badge secondary">Learn More</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  </main>
 
-  <footer class="footer">
-    <div class="container footer-flex">
-      <div class="footer-brand">
-        <img src="../assets/logo.png" alt="FirstPush Logo" class="footer-logo">
-        <span>FirstPush</span>
-      </div>
-      <div class="footer-links">
-        <a href="../about/about.html">About</a>
-        <a href="../contact/contact.html">Contact</a>
-        <a href="../resources/roadmaps.html">Resources</a>
+  <!-- Footer CTA -->
+  <section class="gg-footer-cta">
+    <div class="gg-footer-cta-inner">
+      <h3 class="gg-footer-cta-title">Ready to Transform Your LinkedIn Profile?</h3>
+      <p class="gg-footer-cta-desc">Join thousands of students who've landed their dream internships and jobs with our proven system.</p>
+      <div class="gg-footer-cta-actions">
+        <button class="gg-btn gg-btn-primary">
+          <span class="gg-btn-icon">🎯</span>
+          Start Your Free Profile Analysis
+        </button>
+        <button class="gg-btn gg-btn-outline">
+          <span class="gg-btn-icon">📅</span>
+          Book a Free Consultation
+        </button>
       </div>
     </div>
-  </footer>
-
-  <script>
-    // Tab switching logic
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const tab = btn.getAttribute('data-tab');
-        tabContents.forEach(tc => tc.classList.remove('active'));
-        document.getElementById('tab-' + tab).classList.add('active');
-      });
-    });
-    // Interactive Profile Builder logic
-    const generateBtn = document.getElementById('generatePlan');
-    if (generateBtn) {
-      generateBtn.addEventListener('click', function() {
-        const major = document.getElementById('major').value;
-        const goal = document.getElementById('goal').value;
-        const planDiv = document.getElementById('personalizedPlan');
-        planDiv.innerHTML = `<b>Personalized Plan for ${major} - ${goal}:</b><ul style='margin:0.7rem 0 0 1.2rem;padding:0;'><li>Optimize your headline for ${goal}</li><li>Showcase ${major} projects in Experience</li><li>Highlight relevant skills</li><li>Connect with mentors in your field</li></ul>`;
-        planDiv.style.display = 'block';
-      });
-    }
-    // Analyzer logic (static sample)
-    const analyzeBtn = document.getElementById('analyzeBtn');
-    if (analyzeBtn) {
-      analyzeBtn.addEventListener('click', function() {
-        document.getElementById('analysisResult').style.display = 'block';
-      });
-    }
-  </script>
+  </section>
+  <script src="../script.js"></script>
 </body>
 </html>
