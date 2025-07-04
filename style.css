@@ -1,25 +1,24 @@
-/* Color Palette (from reference UI)
-   Primary: #1a2236
-   Accent: #ff6b6b
-   Secondary: #232946
-   Background: #f4f4f6
-   Card: #ffffff
-   Text: #232946
-   Muted: #b8c1ec
+/* Color Palette (updated from image)
+   Background: #f8f6e3 (Cream)
+   Primary: #9ee7e6 (Mint)
+   Accent: #6ed3df (Cyan)
+   Card/Secondary: #7ea6ea (Periwinkle)
+   Text: #222b38 (Dark blue-gray)
+   Muted: #b5d6e6 (Soft blue)
 */
 
 :root {
-  --primary: #1a2236;
-  --accent: #ff6b6b;
-  --secondary: #232946;
-  --background: #f4f4f6;
+  --background: #f8f6e3;
+  --primary: #9ee7e6;
+  --accent: #6ed3df;
+  --secondary: #7ea6ea;
   --card: #ffffff;
-  --text: #232946;
-  --muted: #b8c1ec;
-  --gradient-hero: linear-gradient(135deg, #232946 60%, #ff6b6b 100%);
-  --gradient-btn: linear-gradient(90deg, #ff6b6b 0%, #ffb86b 100%);
-  --shadow-card: 0 4px 24px rgba(26,34,54,0.10);
-  --shadow-hover: 0 8px 32px rgba(255,107,107,0.18);
+  --text: #222b38;
+  --muted: #b5d6e6;
+  --gradient-hero: linear-gradient(135deg, #9ee7e6 60%, #6ed3df 100%);
+  --gradient-btn: linear-gradient(90deg, #6ed3df 0%, #7ea6ea 100%);
+  --shadow-card: 0 4px 24px rgba(34,43,56,0.10);
+  --shadow-hover: 0 8px 32px rgba(110,211,223,0.18);
 }
 
 * {
@@ -473,4 +472,47 @@ body {
   .container {
     width: 98%;
   }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.2rem;
+  max-width: 700px;
+  margin: 2.5rem auto 0 auto;
+}
+@media (min-width: 700px) {
+  .stats-grid { grid-template-columns: repeat(4, 1fr); }
+}
+.stat {
+  background: var(--secondary);
+  color: var(--text);
+  border-radius: 18px;
+  padding: 2.2rem 1.2rem 1.7rem 1.2rem;
+  box-shadow: var(--shadow-card);
+  font-size: 1.18rem;
+  font-weight: 600;
+  text-align: center;
+  transition: box-shadow 0.18s, background 0.18s;
+}
+.stat .stat-value {
+  font-size: 2.3rem;
+  font-weight: bold;
+  color: #222b38;
+  margin-bottom: 0.4rem;
+}
+.stat .stat-label {
+  font-size: 1.08rem;
+  color: #1a2236;
+  opacity: 0.85;
+}
+/* Enhance card grids for templates, community, resources, etc. */
+[style*="max-width:260px"], [style*="max-width:320px"], [style*="max-width:500px"] {
+  background: var(--secondary) !important;
+  color: #222b38 !important;
+  border-radius: 18px !important;
+  padding: 2rem 1.5rem !important;
+  box-shadow: var(--shadow-card) !important;
+  font-size: 1.08rem !important;
+  font-weight: 500 !important;
 }
