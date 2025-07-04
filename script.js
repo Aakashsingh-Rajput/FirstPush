@@ -266,3 +266,169 @@ document.addEventListener('DOMContentLoaded', function () {
     `;
   }
 });
+
+// --- GitHub Guide Interactivity ---
+document.addEventListener('DOMContentLoaded', function () {
+  // Tab navigation
+  const tabButtons = document.querySelectorAll('.gg-tab');
+  const tabPanels = document.querySelectorAll('.gg-tab-panel');
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', function () {
+      tabButtons.forEach(b => b.classList.remove('active'));
+      tabPanels.forEach(panel => panel.hidden = true);
+      btn.classList.add('active');
+      const tab = btn.getAttribute('data-tab');
+      const panel = document.querySelector(`.gg-tab-panel[data-tab="${tab}"]`);
+      if (panel) panel.hidden = false;
+      btn.setAttribute('aria-selected', 'true');
+      tabButtons.forEach(b => { if (b !== btn) b.setAttribute('aria-selected', 'false'); });
+    });
+  });
+
+  // Milestones checklist
+  const milestones = [
+    { id: 0, title: "Create your first repository", completed: true },
+    { id: 1, title: "Write a compelling README", completed: true },
+    { id: 2, title: "Make your first commit", completed: false },
+    { id: 3, title: "Create your first pull request", completed: false },
+    { id: 4, title: "Add project documentation", completed: false },
+    { id: 5, title: "Contribute to open source", completed: false },
+  ];
+  let checkedItems = [0, 1];
+  const milestonesList = document.getElementById('gg-milestones-list');
+  function renderMilestones() {
+    milestonesList.innerHTML = '';
+    milestones.forEach(milestone => {
+      const div = document.createElement('div');
+      div.className = 'gg-milestone' + (checkedItems.includes(milestone.id) ? ' completed' : '');
+      div.tabIndex = 0;
+      div.setAttribute('role', 'checkbox');
+      div.setAttribute('aria-checked', checkedItems.includes(milestone.id));
+      div.innerHTML = `
+        <span class="gg-milestone-icon">${checkedItems.includes(milestone.id) ? '✅' : '⚪'}</span>
+        <span>${milestone.title}</span>
+        ${checkedItems.includes(milestone.id) ? '<span class="gg-badge">Completed</span>' : ''}
+      `;
+      div.addEventListener('click', () => toggleMilestone(milestone.id));
+      div.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { toggleMilestone(milestone.id); e.preventDefault(); } });
+      milestonesList.appendChild(div);
+    });
+    updateProgress();
+  }
+  function toggleMilestone(id) {
+    if (checkedItems.includes(id)) {
+      checkedItems = checkedItems.filter(item => item !== id);
+    } else {
+      checkedItems.push(id);
+    }
+    renderMilestones();
+  }
+  function updateProgress() {
+    const completedCount = checkedItems.length;
+    const percent = Math.round((completedCount / milestones.length) * 100);
+    document.getElementById('gg-progress-percentage').textContent = percent + '%';
+    document.getElementById('gg-progress-bar-inner').style.width = percent + '%';
+    document.getElementById('gg-progress-count').textContent = completedCount;
+  }
+  if (milestonesList) renderMilestones();
+
+  // Learning modules
+  const learnModules = [
+    { title: "Git Basics", description: "Learn essential Git commands and workflows", duration: "15 min", level: "Beginner", icon: '🌱' },
+    { title: "README Mastery", description: "Create compelling project documentation", duration: "20 min", level: "Beginner", icon: '📄' },
+    { title: "Open Source Contribution", description: "Make your first pull request", duration: "30 min", level: "Intermediate", icon: '🌍' },
+    { title: "Profile Optimization", description: "Showcase your skills effectively", duration: "25 min", level: "Beginner", icon: '🧑‍💻' },
+    { title: "Project Structure", description: "Organize your repositories professionally", duration: "18 min", level: "Intermediate", icon: '🗂️' },
+    { title: "Community Building", description: "Engage with the developer community", duration: "22 min", level: "Beginner", icon: '👥' },
+  ];
+  const learnGrid = document.querySelector('.gg-learn-grid');
+  if (learnGrid) {
+    learnGrid.innerHTML = '';
+    learnModules.forEach(module => {
+      const card = document.createElement('div');
+      card.className = 'gg-card';
+      card.innerHTML = `
+        <div class="gg-card-header"><span class="gg-tab-icon">${module.icon}</span> ${module.title}</div>
+        <div class="gg-card-desc">${module.description}</div>
+        <div class="gg-learn-meta">
+          <span class="gg-badge">${module.level}</span>
+          <span class="gg-learn-duration">${module.duration}</span>
+        </div>
+        <button class="gg-btn gg-btn-outline gg-btn-block mt-2"><span class="gg-btn-icon">▶️</span> Start Module</button>
+      `;
+      learnGrid.appendChild(card);
+    });
+  }
+
+  // Community profiles
+  const communityProfiles = [
+    { name: "Alex Chen", level: "Beginner", projects: 8, stars: 24, avatar: '', description: "Full-stack developer passionate about React and Node.js", upvotes: 15 },
+    { name: "Sarah Johnson", level: "Intermediate", projects: 15, stars: 67, avatar: '', description: "Frontend developer specializing in modern web technologies", upvotes: 32 },
+    { name: "Mike Rodriguez", level: "Beginner", projects: 5, stars: 12, avatar: '', description: "Learning Python and data science fundamentals", upvotes: 8 },
+  ];
+  const communityGrid = document.getElementById('gg-community-grid');
+  if (communityGrid) {
+    communityGrid.innerHTML = '';
+    communityProfiles.forEach(profile => {
+      const card = document.createElement('div');
+      card.className = 'gg-card';
+      card.innerHTML = `
+        <div class="gg-card-header">
+          <span class="gg-tab-icon">👤</span> ${profile.name} <span class="gg-badge">${profile.level}</span>
+        </div>
+        <div class="gg-card-body">${profile.description}</div>
+        <div class="gg-community-meta">
+          <span>Projects: <b>${profile.projects}</b></span>
+          <span>Stars: <b>${profile.stars}</b></span>
+          <button class="gg-btn gg-btn-outline gg-btn-sm"><span class="gg-btn-icon">👍</span> ${profile.upvotes}</button>
+        </div>
+      `;
+      communityGrid.appendChild(card);
+    });
+  }
+
+  // Mentors
+  const mentors = [
+    { name: "Emily Davis", role: "Senior Frontend Developer", company: "Tech Corp", expertise: ["React", "TypeScript", "UI/UX"], rating: 4.9, sessions: 127 },
+    { name: "David Kim", role: "Full Stack Engineer", company: "StartupXYZ", expertise: ["Node.js", "Python", "AWS"], rating: 4.8, sessions: 89 },
+    { name: "Maria Garcia", role: "Open Source Maintainer", company: "OSS Foundation", expertise: ["Git", "Open Source", "Community"], rating: 5.0, sessions: 156 },
+  ];
+  const mentorsList = document.getElementById('gg-mentors-list');
+  if (mentorsList) {
+    mentorsList.innerHTML = '';
+    mentors.forEach(mentor => {
+      const card = document.createElement('div');
+      card.className = 'gg-mentor-card';
+      card.innerHTML = `
+        <div><b>${mentor.name}</b></div>
+        <div class="gg-mentor-role">${mentor.role} @ ${mentor.company}</div>
+        <div class="gg-mentor-expertise">${mentor.expertise.map(skill => `<span class='gg-badge'>${skill}</span>`).join(' ')}</div>
+        <div class="gg-mentor-rating"><span>⭐</span> ${mentor.rating} &middot; ${mentor.sessions} sessions</div>
+        <button class="gg-btn gg-btn-block gg-btn-primary">Connect</button>
+      `;
+      mentorsList.appendChild(card);
+    });
+  }
+
+  // README Editor live preview
+  const readmeInput = document.getElementById('gg-readme-input');
+  const readmePreview = document.getElementById('gg-readme-preview');
+  if (readmeInput && readmePreview) {
+    const defaultContent = `# Hi there 👋\n\nI'm a passionate developer learning to build amazing projects!\n\n## 🔭 I'm currently working on\n- Building my first full-stack application\n- Contributing to open source projects\n\n## 🌱 I'm currently learning\n- React and Next.js\n- TypeScript\n- Database design\n\n## 📫 How to reach me\n- Email: hello@example.com\n- LinkedIn: linkedin.com/in/yourprofile`;
+    readmeInput.value = defaultContent;
+    function renderPreview() {
+      // Simple markdown to HTML (headings, lists, paragraphs)
+      let text = readmeInput.value;
+      text = text.replace(/^### (.*)$/gm, '<h3>$1</h3>');
+      text = text.replace(/^## (.*)$/gm, '<h2>$1</h2>');
+      text = text.replace(/^# (.*)$/gm, '<h1>$1</h1>');
+      text = text.replace(/^\- (.*)$/gm, '<li>$1</li>');
+      text = text.replace(/(<li>.*<\/li>)/gms, '<ul>$1</ul>');
+      text = text.replace(/\n{2,}/g, '</p><p>');
+      text = '<p>' + text + '</p>';
+      readmePreview.innerHTML = text;
+    }
+    readmeInput.addEventListener('input', renderPreview);
+    renderPreview();
+  }
+});
