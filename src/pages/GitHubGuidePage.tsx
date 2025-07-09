@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
+import { Footer } from '@/components/Footer';
 
 const GitHubGuidePage = () => {
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
@@ -345,6 +346,7 @@ ${profileData.website ? `🌐 **Website:** ${profileData.website}` : ''}
           )}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
