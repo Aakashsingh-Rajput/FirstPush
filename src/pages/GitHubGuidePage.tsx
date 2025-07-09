@@ -99,6 +99,42 @@ ${profileData.website ? `🌐 **Website:** ${profileData.website}` : ''}
     },
     {
       id: 2,
+      title: "Step-by-Step: How to Create a New Repository",
+      description: "Follow these simple steps to create your first GitHub repository.",
+      content: (
+        <div className="space-y-4">
+          <ol className="list-decimal list-inside space-y-2 text-gray-700">
+            <li>
+              <b>Log in to GitHub:</b> Go to <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">github.com</a> and sign in with your account.
+            </li>
+            <li>
+              <b>Click the "+" icon:</b> In the top-right corner, click the <span className="font-mono">+</span> icon, then select <b>"New repository"</b> from the dropdown.
+            </li>
+            <li>
+              <b>Fill in repository details:</b> Enter a name for your repository (e.g., <span className="font-mono">hello-world</span>). You can also add a description if you like.
+            </li>
+            <li>
+              <b>Choose visibility:</b> Select <b>Public</b> (anyone can see your repo) or <b>Private</b> (only you can see it).
+            </li>
+            <li>
+              <b>Initialize with a README:</b> (Recommended) Check the box to add a README file. This helps people understand your project.
+            </li>
+            <li>
+              <b>Click "Create repository":</b> Scroll down and click the green <b>Create repository</b> button. That's it!
+            </li>
+          </ol>
+          <Button 
+            onClick={() => window.open('https://github.com/new', '_blank')}
+            className="w-full"
+          >
+            <Github className="mr-2 h-4 w-4" />
+            Go to Create Repository Page
+          </Button>
+        </div>
+      )
+    },
+    {
+      id: 3,
       title: "Set Up Your Profile",
       description: "Complete your GitHub profile with professional information.",
       content: (
@@ -164,7 +200,7 @@ ${profileData.website ? `🌐 **Website:** ${profileData.website}` : ''}
       )
     },
     {
-      id: 3,
+      id: 4,
       title: "Create Your First Repository",
       description: "Start with a 'Hello World' repository to learn the basics.",
       content: (
@@ -197,7 +233,7 @@ ${profileData.website ? `🌐 **Website:** ${profileData.website}` : ''}
       )
     },
     {
-      id: 4,
+      id: 5,
       title: "Craft an Amazing README",
       description: "Create a professional README that showcases your profile.",
       content: (
@@ -220,7 +256,7 @@ ${profileData.website ? `🌐 **Website:** ${profileData.website}` : ''}
       )
     },
     {
-      id: 5,
+      id: 6,
       title: "Make Your First Commit",
       description: "Learn the Git workflow and make your first commit.",
       content: (
