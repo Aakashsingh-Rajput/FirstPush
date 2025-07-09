@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
+import { Footer } from '@/components/Footer';
 
 const LinkedInGuidePage = () => {
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
@@ -347,6 +348,7 @@ Skills: ${profileData.skills || 'JavaScript, React, Node.js, Python, Git'}`;
           )}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
