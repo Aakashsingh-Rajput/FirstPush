@@ -18,7 +18,8 @@ const GitHubGuidePage = () => {
     bio: '',
     location: '',
     website: '',
-    company: ''
+    company: '',
+    pronouns: ''
   });
   const { toast } = useToast();
 
@@ -40,6 +41,7 @@ const GitHubGuidePage = () => {
 
   const generateReadme = () => {
     const readme = `# Hi there 👋, I'm ${profileData.name || 'Your Name'}
+${profileData.pronouns ? `\n**Pronouns:** ${profileData.pronouns}` : ''}
 
 ## About Me
 ${profileData.bio || 'Write a brief description about yourself here.'}
@@ -136,6 +138,15 @@ ${profileData.website ? `🌐 **Website:** ${profileData.website}` : ''}
                 value={profileData.website}
                 onChange={(e) => setProfileData(prev => ({...prev, website: e.target.value}))}
                 placeholder="https://yourwebsite.com"
+              />
+            </div>
+            <div>
+              <Label htmlFor="pronouns">Pronouns</Label>
+              <Input
+                id="pronouns"
+                value={profileData.pronouns}
+                onChange={(e) => setProfileData(prev => ({...prev, pronouns: e.target.value}))}
+                placeholder="e.g. she/her, he/him, they/them"
               />
             </div>
           </div>
