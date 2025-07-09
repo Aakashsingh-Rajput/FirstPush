@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { Linkedin, Check, ExternalLink, Copy, ArrowLeft, Star, Users, Briefcase } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -21,6 +21,14 @@ const LinkedInGuidePage = () => {
     industry: ''
   });
   const { toast } = useToast();
+  const [liveMessage, setLiveMessage] = useState('');
+  const completionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (completedSteps.length === steps.length && completionRef.current) {
+      completionRef.current.focus();
+    }
+  }, [completedSteps]);
 
   const toggleStep = (stepId: number) => {
     setCompletedSteps(prev => 
@@ -36,6 +44,8 @@ const LinkedInGuidePage = () => {
       title: "Copied to clipboard!",
       description: "The text has been copied to your clipboard.",
     });
+    setLiveMessage('Copied to clipboard!');
+    setTimeout(() => setLiveMessage(''), 2000);
   };
 
   const generateHeadline = () => {
@@ -87,6 +97,17 @@ Skills: ${profileData.skills || 'JavaScript, React, Node.js, Python, Git'}`;
             <p className="text-amber-800 text-sm">
               <strong>Pro Tip:</strong> Profiles with professional photos receive 21x more profile views and 36x more messages!
             </p>
+          </div>
+          <div className="flex justify-center mt-4">
+            <a
+              href="https://www.linkedin.com/signup"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 transition"
+              aria-label="Sign up for LinkedIn (opens in a new tab)"
+            >
+              Sign up for LinkedIn
+            </a>
           </div>
         </div>
       )
@@ -228,7 +249,7 @@ Skills: ${profileData.skills || 'JavaScript, React, Node.js, Python, Git'}`;
             <div className="bg-gray-50 p-4 rounded-lg text-center">
               <Users className="h-8 w-8 text-blue-600 mx-auto mb-2" />
               <h4 className="font-semibold">Target Connections</h4>
-              <p className="text-sm text-gray-600">Aim for 50+ connections in your first month</p>
+              <p className="text-sm text-gray-600">Aim for 100+ connections in your first month</p>
             </div>
             <div className="bg-gray-50 p-4 rounded-lg text-center">
               <Briefcase className="h-8 w-8 text-green-600 mx-auto mb-2" />
@@ -246,108 +267,116 @@ Skills: ${profileData.skills || 'JavaScript, React, Node.js, Python, Git'}`;
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       <Navbar />
-      
-      <div className="pt-16 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="mb-8">
-            <Link 
-              to="/"
-              className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-4"
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Home
-            </Link>
-            
-            <div className="flex items-center mb-4">
-              <div className="p-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 mr-4">
-                <Linkedin className="h-8 w-8 text-white" />
-              </div>
-              <div>
-                <h1 className="text-3xl font-bold text-gray-900">LinkedIn Optimization</h1>
-                <p className="text-gray-600">Build a professional presence that attracts opportunities</p>
-              </div>
-            </div>
-
-            {/* Progress Bar */}
-            <div className="bg-gray-200 rounded-full h-2 mb-6">
-              <div 
-                className="bg-gradient-to-r from-blue-600 to-purple-600 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${progress}%` }}
-              ></div>
-            </div>
-            <div className="text-sm text-gray-600 mb-8">
-              Progress: {completedSteps.length} of {steps.length} steps completed ({Math.round(progress)}%)
-            </div>
-          </div>
-
-          {/* Steps */}
-          <div className="space-y-8">
-            {steps.map((step) => (
-              <div
-                key={step.id}
-                className={`bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 ${
-                  completedSteps.includes(step.id) ? 'ring-2 ring-green-500' : ''
-                }`}
+      <main aria-label="LinkedIn Guide Main Content">
+        <div className="pt-16 pb-20 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            {/* Header */}
+            <div className="mb-8">
+              <Link 
+                to="/"
+                className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-4"
               >
-                <div className="flex items-start justify-between mb-6">
-                  <div className="flex items-start space-x-4">
-                    <div 
-                      className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
-                        completedSteps.includes(step.id) 
-                          ? 'bg-green-500 text-white' 
-                          : 'bg-gray-200 text-gray-600'
-                      }`}
-                    >
-                      {completedSteps.includes(step.id) ? <Check className="h-4 w-4" /> : step.id}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
-                      <p className="text-gray-600">{step.description}</p>
-                    </div>
-                  </div>
-                  <Button
-                    onClick={() => toggleStep(step.id)}
-                    variant={completedSteps.includes(step.id) ? "default" : "outline"}
-                    size="sm"
-                  >
-                    {completedSteps.includes(step.id) ? 'Completed' : 'Mark Complete'}
-                  </Button>
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Back to Home
+              </Link>
+              <div className="flex items-center mb-4">
+                <div className="p-3 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 mr-4">
+                  <Linkedin className="h-8 w-8 text-white" />
                 </div>
-                
-                <div className="ml-12">
-                  {step.content}
+                <div>
+                  <h1 className="text-3xl font-bold text-gray-900">LinkedIn Optimization</h1>
+                  <p className="text-gray-600">Build a professional presence that attracts opportunities</p>
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* Completion Message */}
-          {completedSteps.length === steps.length && (
-            <div className="mt-8 bg-green-50 border border-green-200 rounded-2xl p-8 text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-green-500 text-white rounded-full mb-4">
-                <Star className="h-8 w-8" />
+              {/* Progress Bar */}
+              <div className="bg-gray-200 rounded-full h-2 mb-6">
+                <div 
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 h-2 rounded-full transition-all duration-300"
+                  style={{ width: `${progress}%` }}
+                ></div>
               </div>
-              <h3 className="text-2xl font-bold text-green-900 mb-2">Outstanding Work! 🎉</h3>
-              <p className="text-green-800 mb-6">
-                Your LinkedIn profile is now optimized to attract recruiters and opportunities!
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/guides/portfolio">
-                  <Button className="bg-purple-600 hover:bg-purple-700">
-                    Next: Portfolio Guide
-                  </Button>
-                </Link>
-                <Link to="/">
-                  <Button variant="outline">
-                    Back to Home
-                  </Button>
-                </Link>
+              <div className="text-sm text-gray-600 mb-8">
+                Progress: {completedSteps.length} of {steps.length} steps completed ({Math.round(progress)}%)
               </div>
             </div>
-          )}
+            {/* Accessibility live region for feedback */}
+            <div aria-live="polite" className="sr-only" id="live-region">
+              {liveMessage}
+            </div>
+            {/* Steps as ordered list */}
+            <ol className="space-y-8" aria-label="LinkedIn Profile Optimization Steps">
+              {steps.map((step) => (
+                <li key={step.id} aria-label={`Step ${step.id}: ${step.title}`}
+                  className={`bg-white rounded-2xl p-8 shadow-lg transition-all duration-300 ${
+                    completedSteps.includes(step.id) ? 'ring-2 ring-green-500' : ''
+                  }`}
+                >
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="flex items-start space-x-4">
+                      <div 
+                        className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
+                          completedSteps.includes(step.id) 
+                            ? 'bg-green-500 text-white' 
+                            : 'bg-gray-200 text-gray-600'
+                        }`}
+                        aria-label={completedSteps.includes(step.id) ? `Step ${step.id} completed` : `Step ${step.id} not completed`}
+                      >
+                        {completedSteps.includes(step.id) ? <Check className="h-4 w-4" /> : step.id}
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
+                        <p className="text-gray-600">{step.description}</p>
+                      </div>
+                    </div>
+                    <Button
+                      onClick={() => toggleStep(step.id)}
+                      variant={completedSteps.includes(step.id) ? "default" : "outline"}
+                      size="sm"
+                      aria-pressed={completedSteps.includes(step.id)}
+                      aria-label={completedSteps.includes(step.id) ? `Mark step ${step.id} as incomplete` : `Mark step ${step.id} as complete`}
+                    >
+                      {completedSteps.includes(step.id) ? 'Completed' : 'Mark Complete'}
+                    </Button>
+                  </div>
+                  <div className="ml-12">
+                    {step.content}
+                  </div>
+                </li>
+              ))}
+            </ol>
+            {/* Completion Message */}
+            {completedSteps.length === steps.length && (
+              <div
+                className="mt-8 bg-green-50 border border-green-200 rounded-2xl p-8 text-center"
+                tabIndex={-1}
+                ref={completionRef}
+                aria-live="polite"
+                aria-label="All steps completed. Congratulations!"
+              >
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-green-500 text-white rounded-full mb-4">
+                  <Star className="h-8 w-8" />
+                </div>
+                <h3 className="text-2xl font-bold text-green-900 mb-2">Outstanding Work! 🎉</h3>
+                <p className="text-green-800 mb-6">
+                  Your LinkedIn profile is now optimized to attract recruiters and opportunities!
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link to="/guides/portfolio">
+                    <Button className="bg-purple-600 hover:bg-purple-700">
+                      Next: Portfolio Guide
+                    </Button>
+                  </Link>
+                  <Link to="/">
+                    <Button variant="outline">
+                      Back to Home
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      </main>
       <Footer />
     </div>
   );
