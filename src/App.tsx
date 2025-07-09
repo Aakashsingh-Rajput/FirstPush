@@ -10,6 +10,9 @@ import GitHubGuidePage from "./pages/GitHubGuidePage";
 import LinkedInGuidePage from "./pages/LinkedInGuidePage";
 import PortfolioGuidePage from "./pages/PortfolioGuidePage";
 import ResumeGuidePage from "./pages/ResumeGuidePage";
+import TemplatesPage from "./pages/TemplatesPage";
+import ProfilePage from "./pages/ProfilePage";
+import SettingsPage from "./pages/SettingsPage";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +28,9 @@ const App = () => (
           <Route path="/guides/linkedin" element={<LinkedInGuidePage />} />
           <Route path="/guides/portfolio" element={<PortfolioGuidePage />} />
           <Route path="/guides/resume" element={<ResumeGuidePage />} />
+          <Route path="/resources/templates" element={<TemplatesPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/settings" element={<SettingsPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
