@@ -252,8 +252,9 @@ const ProfilePage = () => {
                     className="flex-1 border border-gray-300 rounded px-3 py-2 text-sm"
                     onKeyPress={(e) => {
                       if (e.key === 'Enter') {
-                        handleSkillAdd(e.target.value);
-                        e.target.value = '';
+                        const target = e.target as HTMLInputElement;
+                        handleSkillAdd(target.value);
+                        target.value = '';
                       }
                     }}
                   />
