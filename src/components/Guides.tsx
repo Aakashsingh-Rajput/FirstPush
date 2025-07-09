@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Github, Linkedin, Globe, FileText, ArrowRight, Clock, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const Guides = () => {
   const guides = [
@@ -11,7 +12,8 @@ export const Guides = () => {
       duration: '30 min',
       difficulty: 'Beginner',
       gradient: 'from-gray-600 to-gray-800',
-      topics: ['Profile Setup', 'First Repository', 'Pull Requests', 'README Writing']
+      topics: ['Profile Setup', 'First Repository', 'Pull Requests', 'README Writing'],
+      link: '/guides/github'
     },
     {
       icon: Linkedin,
@@ -20,7 +22,8 @@ export const Guides = () => {
       duration: '45 min',
       difficulty: 'Beginner',
       gradient: 'from-blue-600 to-blue-800',
-      topics: ['Profile Photo', 'Headline Writing', 'Experience Section', 'Networking Tips']
+      topics: ['Profile Photo', 'Headline Writing', 'Experience Section', 'Networking Tips'],
+      link: '/guides/linkedin'
     },
     {
       icon: Globe,
@@ -29,7 +32,8 @@ export const Guides = () => {
       duration: '2 hours',
       difficulty: 'Intermediate',
       gradient: 'from-purple-600 to-purple-800',
-      topics: ['Design Principles', 'Project Showcase', 'Responsive Design', 'Deployment']
+      topics: ['Design Principles', 'Project Showcase', 'Responsive Design', 'Deployment'],
+      link: '/guides/portfolio'
     },
     {
       icon: FileText,
@@ -38,7 +42,8 @@ export const Guides = () => {
       duration: '1 hour',
       difficulty: 'Beginner',
       gradient: 'from-green-600 to-green-800',
-      topics: ['ATS Optimization', 'Skills Section', 'Project Descriptions', 'Formatting Tips']
+      topics: ['ATS Optimization', 'Skills Section', 'Project Descriptions', 'Formatting Tips'],
+      link: '/guides/resume'
     }
   ];
 
@@ -92,10 +97,13 @@ export const Guides = () => {
                 </div>
               </div>
               
-              <button className="w-full flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 group-hover:scale-105">
+              <Link 
+                to={guide.link}
+                className="w-full flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 group-hover:scale-105"
+              >
                 Start Guide
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </button>
+              </Link>
             </div>
           ))}
         </div>
