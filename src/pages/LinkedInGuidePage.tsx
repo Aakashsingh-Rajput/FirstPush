@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
 import { Footer } from '@/components/Footer';
+import axios from 'axios';
 
 const LinkedInGuidePage = () => {
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
@@ -17,12 +18,15 @@ const LinkedInGuidePage = () => {
     headline: '',
     summary: '',
     currentRole: '',
+    exCompany: '', // <-- add this
     skills: '',
     industry: ''
   });
   const { toast } = useToast();
   const [liveMessage, setLiveMessage] = useState('');
   const completionRef = useRef<HTMLDivElement>(null);
+  const [aiSummary, setAiSummary] = useState('');
+  const [loadingSummary, setLoadingSummary] = useState(false);
 
   useEffect(() => {
     if (completedSteps.length === steps.length && completionRef.current) {
@@ -48,33 +52,72 @@ const LinkedInGuidePage = () => {
     setTimeout(() => setLiveMessage(''), 2000);
   };
 
+  const roleSkillsMap: Record<string, string[]> = {
+    'data scientist': ['Python', 'Tableau', 'SQL'],
+    'data analyst': ['Excel', 'SQL', 'Power BI'],
+    'software developer': ['JavaScript', 'React', 'Node.js'],
+    'frontend developer': ['React', 'JavaScript', 'CSS'],
+    'backend developer': ['Node.js', 'Express', 'MongoDB'],
+    'full stack developer': ['React', 'Node.js', 'MongoDB'],
+    'machine learning engineer': ['Python', 'TensorFlow', 'scikit-learn'],
+    'devops engineer': ['AWS', 'Docker', 'Kubernetes'],
+    'product manager': ['Agile', 'JIRA', 'Roadmapping'],
+    'ui ux designer': ['Figma', 'Sketch', 'Adobe XD'],
+    'android developer': ['Kotlin', 'Android Studio', 'Java'],
+    'ios developer': ['Swift', 'Xcode', 'Objective-C'],
+    // add more as needed
+  };
+
   const generateHeadline = () => {
-    const role = profileData.currentRole || 'Software Developer';
+    const role = profileData.currentRole || 'Software Engineer';
     const industry = profileData.industry || 'Technology';
-    return `${role} | Building innovative solutions in ${industry} | Open to new opportunities`;
+    // Use up to 2 skills if provided, else use defaults based on role
+    let skills = '';
+    if (profileData.skills) {
+      const skillArr = profileData.skills.split(',').map(s => s.trim()).filter(Boolean);
+      if (skillArr.length > 0) {
+        skills = skillArr.slice(0, 2).join(', ');
+      }
+    } else if (role) {
+      // Try to match role to mapping (case-insensitive)
+      const key = role.trim().toLowerCase();
+      if (roleSkillsMap[key]) {
+        skills = roleSkillsMap[key].slice(0, 2).join(', ');
+      } else {
+        // fallback
+        skills = 'Python, SQL';
+      }
+    } else {
+      skills = 'Python, SQL';
+    }
+    // Only include Ex-Company if user entered it
+    const exCompany = profileData.exCompany && profileData.exCompany.trim() !== '' ? `| ${profileData.exCompany}` : '';
+    // Format: Role [| Ex-Company] | Industry | Skills | Open to new opportunities
+    return `${role} ${exCompany} | ${industry} | ${skills} | Open to new opportunities`;
   };
 
-  const generateSummary = () => {
-    return `As a passionate ${profileData.currentRole || 'software developer'}, I specialize in creating innovative solutions that drive business growth and enhance user experiences. 
-
-🚀 What I bring to the table:
-• Strong foundation in modern development practices
-• Collaborative mindset with excellent communication skills
-• Continuous learner staying updated with industry trends
-• Problem-solving approach to complex technical challenges
-
-💡 Currently focused on:
-${profileData.summary || 'Building full-stack applications using cutting-edge technologies'}
-
-🎯 Looking to connect with:
-• Fellow developers and tech enthusiasts
-• Industry professionals and mentors
-• Potential collaborators on exciting projects
-
-Let's connect and explore how we can create something amazing together!
-
-Skills: ${profileData.skills || 'JavaScript, React, Node.js, Python, Git'}`;
+  // Replace generateSummary with AI call
+  const fetchAISummary = async (desc: string, skills: string) => {
+    setLoadingSummary(true);
+    try {
+      const response = await axios.post('http://localhost:5001/api/generate-summary', {
+        description: desc,
+        skills: skills,
+      });
+      setAiSummary(response.data.summary);
+    } catch (e) {
+      setAiSummary('Could not generate summary. Please try again.');
+    }
+    setLoadingSummary(false);
   };
+
+  useEffect(() => {
+    if (profileData.summary || profileData.skills) {
+      fetchAISummary(profileData.summary, profileData.skills);
+    } else {
+      setAiSummary('');
+    }
+  }, [profileData.summary, profileData.skills]);
 
   const steps = [
     {
@@ -127,6 +170,29 @@ Skills: ${profileData.skills || 'JavaScript, React, Node.js, Python, Git'}`;
               placeholder="Software Developer"
             />
           </div>
+          {/* Ex-Company input */}
+          <div>
+            <Label htmlFor="exCompany">Ex-Company (optional)</Label>
+            <Input
+              id="exCompany"
+              value={profileData.exCompany}
+              onChange={(e) => setProfileData(prev => ({...prev, exCompany: e.target.value}))}
+              placeholder="Ex-Google"
+            />
+          </div>
+          {/* Live-generated headline preview below Current Role/Aspiration */}
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <h4 className="font-semibold mb-2">Generated Headline:</h4>
+            <p className="text-gray-700 italic">{generateHeadline()}</p>
+            <Button 
+              onClick={() => copyToClipboard(generateHeadline())}
+              variant="outline"
+              className="w-full mt-2"
+            >
+              <Copy className="mr-2 h-4 w-4" />
+              Copy Headline
+            </Button>
+          </div>
           <div>
             <Label htmlFor="industry">Industry/Focus Area</Label>
             <Input
@@ -136,18 +202,13 @@ Skills: ${profileData.skills || 'JavaScript, React, Node.js, Python, Git'}`;
               placeholder="Technology"
             />
           </div>
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <h4 className="font-semibold mb-2">Generated Headline:</h4>
-            <p className="text-gray-700 italic">{generateHeadline()}</p>
+          {/* Example ideal headline in gray box */}
+          <div className="bg-gray-100 p-4 rounded-lg">
+            <h4 className="font-semibold mb-2">Example of an Ideal LinkedIn Headline:</h4>
+            <p className="text-gray-700 italic">
+              Software Engineer | Ex-Google | Building scalable web apps | Python, SQL | Open to new opportunities
+            </p>
           </div>
-          <Button 
-            onClick={() => copyToClipboard(generateHeadline())}
-            variant="outline"
-            className="w-full"
-          >
-            <Copy className="mr-2 h-4 w-4" />
-            Copy Headline
-          </Button>
         </div>
       )
     },
@@ -178,18 +239,23 @@ Skills: ${profileData.skills || 'JavaScript, React, Node.js, Python, Git'}`;
           </div>
           <div className="bg-gray-50 p-4 rounded-lg">
             <h4 className="font-semibold mb-2">Generated Summary:</h4>
-            <div className="text-gray-700 text-sm whitespace-pre-line bg-white p-3 rounded border max-h-40 overflow-y-auto">
-              {generateSummary()}
-            </div>
+            {loadingSummary ? (
+              <p className="text-gray-500 italic">Generating summary...</p>
+            ) : (
+              <div className="text-gray-700 text-sm whitespace-pre-line bg-white p-3 rounded border max-h-40 overflow-y-auto">
+                {aiSummary}
+              </div>
+            )}
+            <Button 
+              onClick={() => copyToClipboard(aiSummary)}
+              variant="outline"
+              className="w-full"
+              disabled={loadingSummary}
+            >
+              <Copy className="mr-2 h-4 w-4" />
+              Copy Summary
+            </Button>
           </div>
-          <Button 
-            onClick={() => copyToClipboard(generateSummary())}
-            variant="outline"
-            className="w-full"
-          >
-            <Copy className="mr-2 h-4 w-4" />
-            Copy Summary
-          </Button>
         </div>
       )
     },
