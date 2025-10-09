@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Github, Linkedin, Mail, User, LogIn, UserPlus } from 'lucide-react';
+import { ArrowRight, Github, Linkedin, Mail, User, LogIn, UserPlus, Globe, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
@@ -105,47 +105,27 @@ const LandingPage = () => {
             </Button>
           </div>
 
-          {/* Quick Access Cards */}
-          <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
-              <div className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg w-fit mx-auto mb-4">
-                <Github className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">GitHub Mastery</h3>
-              <p className="text-gray-600 mb-4">Build your developer presence from scratch</p>
-              <Link to="/guides/github">
-                <Button variant="outline" className="w-full">
-                  Get Started
-                </Button>
+          {/* Icon Cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto mt-16">
+            {[
+              { icon: Github, label: 'GitHub Setup', color: 'from-gray-600 to-gray-800', link: '/guides/github' },
+              { icon: Linkedin, label: 'LinkedIn Profile', color: 'from-blue-600 to-blue-800', link: '/guides/linkedin' },
+              { icon: Globe, label: 'Portfolio Site', color: 'from-purple-600 to-purple-800', link: '/guides/portfolio' },
+              { icon: FileText, label: 'Resume Tips', color: 'from-green-600 to-green-800', link: '/guides/resume' },
+            ].map((item, index) => (
+              <Link
+                key={item.label}
+                to={item.link}
+                className="flex flex-col items-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+              >
+                <div className={`p-3 rounded-lg bg-gradient-to-r ${item.color} mb-3`}>
+                  <item.icon className="h-6 w-6 text-white" />
+                </div>
+                <span className="text-sm font-medium text-gray-700 text-center">{item.label}</span>
               </Link>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
-              <div className="p-3 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg w-fit mx-auto mb-4">
-                <User className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Portfolio Building</h3>
-              <p className="text-gray-600 mb-4">Create stunning portfolios that stand out</p>
-              <Link to="/guides/portfolio">
-                <Button variant="outline" className="w-full">
-                  Build Portfolio
-                </Button>
-              </Link>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105">
-              <div className="p-3 bg-gradient-to-r from-green-500 to-green-600 rounded-lg w-fit mx-auto mb-4">
-                <Mail className="h-8 w-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Connect & Grow</h3>
-              <p className="text-gray-600 mb-4">Join our community of developers</p>
-              <Link to="/contact">
-                <Button variant="outline" className="w-full">
-                  Join Community
-                </Button>
-              </Link>
-            </div>
+            ))}
           </div>
+
         </div>
       </section>
 
