@@ -8,6 +8,9 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 =======
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -21,11 +24,15 @@ import ProfilePage from "./pages/ProfilePage";
 import SettingsPage from "./pages/SettingsPage";
 import ComingSoon from './pages/ComingSoon';
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
 import ProgressTracker from './components/ProgressTracker';
 import FAQBot from './components/FAQBot';
 import React from 'react';
+=======
+import AuthenticationPage from './pages/AuthenticationPage';
+>>>>>>> Stashed changes
 =======
 import AuthenticationPage from './pages/AuthenticationPage';
 >>>>>>> Stashed changes
@@ -42,6 +49,7 @@ function ScrollToTop() {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
     <TooltipProvider>
       <Toaster />
@@ -69,6 +77,8 @@ const App = () => (
       </BrowserRouter>
     </TooltipProvider>
 =======
+=======
+>>>>>>> Stashed changes
     <AuthProvider>
       <TooltipProvider>
         <Toaster />
@@ -92,6 +102,9 @@ const App = () => (
         </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   </QueryClientProvider>
 );
