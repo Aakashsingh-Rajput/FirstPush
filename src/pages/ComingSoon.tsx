@@ -1,12 +1,15 @@
-import React from 'react';
+import React from "react";
 
-const ComingSoon = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-blue-50">
-    <div className="bg-white p-10 rounded-2xl shadow-lg text-center">
-      <h1 className="text-3xl font-bold mb-4 text-gray-900">Coming Soon</h1>
-      <p className="text-gray-600 text-lg">This page is under construction. Stay tuned for updates!</p>
+const ComingSoon: React.FC = () => {
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center bg-white text-gray-800 p-6">
+      <h1 className="text-4xl font-bold mb-3">Coming Soon</h1>
+      <p className="text-lg text-gray-600">We're building this page. Check back shortly.</p>
     </div>
-  </div>
-);
+  );
+};
 
-export default ComingSoon; 
+export default ComingSoon;
+
+
+

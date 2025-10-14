@@ -3,7 +3,12 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+<<<<<<< Updated upstream
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+=======
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
+>>>>>>> Stashed changes
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import GitHubGuidePage from "./pages/GitHubGuidePage";
@@ -15,11 +20,15 @@ import ResumeTemplateDetail from "./pages/ResumeTemplateDetail";
 import ProfilePage from "./pages/ProfilePage";
 import SettingsPage from "./pages/SettingsPage";
 import ComingSoon from './pages/ComingSoon';
+<<<<<<< Updated upstream
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
 import ProgressTracker from './components/ProgressTracker';
 import FAQBot from './components/FAQBot';
 import React from 'react';
+=======
+import AuthenticationPage from './pages/AuthenticationPage';
+>>>>>>> Stashed changes
 
 const queryClient = new QueryClient();
 
@@ -33,6 +42,7 @@ function ScrollToTop() {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
+<<<<<<< Updated upstream
     <TooltipProvider>
       <Toaster />
       <Sonner />
@@ -58,6 +68,31 @@ const App = () => (
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
+=======
+    <AuthProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/guides/github" element={<GitHubGuidePage />} />
+            <Route path="/guides/linkedin" element={<LinkedInGuidePage />} />
+            <Route path="/guides/portfolio" element={<PortfolioGuidePage />} />
+            <Route path="/guides/resume" element={<ResumeGuidePage />} />
+            <Route path="/resources/templates" element={<TemplatesPage />} />
+            <Route path="/templates/:templateId" element={<ResumeTemplateDetail />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/coming-soon" element={<ComingSoon />} />
+            <Route path="/auth" element={<AuthenticationPage />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </AuthProvider>
+>>>>>>> Stashed changes
   </QueryClientProvider>
 );
 

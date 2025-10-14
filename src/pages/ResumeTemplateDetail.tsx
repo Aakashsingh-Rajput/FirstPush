@@ -498,3 +498,19 @@ const ResumeTemplateDetail: React.FC = () => {
 };
 
 export default ResumeTemplateDetail;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
